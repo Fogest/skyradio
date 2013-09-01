@@ -1,17 +1,24 @@
 @import url(http://fonts.googleapis.com/css?family=Expletus+Sans);
 @import url(http://fonts.googleapis.com/css?family=Archivo+Black);
-body {
+
+body { 
+	background:black url(bg/tweed.png) repeat top left scroll !important;
+	color: white !important;
 	padding-bottom:10px;
 	font-family: 'Expletus Sans', cursive;
 }
 h1,h2,h3,a.brand{
 	font-family: 'Archivo Black', sans-serif;
 }
+.modal {
+	color: black !important;
+}
 #site {
 }
 
 #mainContent {
 	min-height: 500px;
+	color:white !important;
 }
 .navbar-fixed-top {
 	position: relative;
@@ -54,4 +61,16 @@ input[type=text].valid, input[type=password].valid, textarea.valid {
 #recaptcha_area
 {
    margin:0 auto !important;
+}
+
+.well {
+	color: black;
+}
+#userContent {
+	border-width: 5px;
+	border-color: rgba(185, 27, 33, 1);
+	border-style: solid;
+	min-height: 250px;
+	background-color: white;
+	color: black;
 }

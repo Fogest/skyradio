@@ -113,7 +113,7 @@
 				case "SELECT":				
 					if ( !$working_result )
 					{						
-						echo $alert->displayError('Error in executing SELECT query:' . $query . ' with error ' . $db->error . '');					
+						echo 'Error in executing SELECT query:' . $query . ' with error ' . $db->error;					
 						
 					}		
 					
@@ -124,7 +124,7 @@
 				case "INSERT":
 					if ( !$working_result )
 					{
-						echo $alert->displayError('Error in executing INSERT query: ' . $query . ' with error ' . $db->error . '');			
+						echo 'Error in executing INSERT query: ' . $query . ' with error ' . $db->error;			
 					}
 					
 					$ret_value = $working_result;

@@ -1,4 +1,5 @@
 <?php
+error_reporting(-1);
 	$table = "users";
 	
 	$username = $_POST['username_register'];
@@ -21,7 +22,7 @@
 	if($password != $passwordConfirm)
 		$errors .= "Passwords do not match<br/>";
 	
-	if(!preg_match('\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b', $email))
+	if(!preg_match("/^[\w-\._\+%]+@(?:[\w-]+\.)+[\w]{2,6}$/", $email))
 		$errors .= "Email is not valid!";
 	if(!empty($errors))
 		die($errors);
@@ -30,7 +31,8 @@
 	$values['password'] = hash("sha256",$password);
 	$values['email'] = $email;
 	$values['account_creation_date'] = date("Y-m-d H:m:s");
-	$values['account_creation_ip'] = ip2long($_SERVER['HTTP_X_FORWARDED_FOR']); 
+	$values['account_creation_ip'] = ip2long($_SERVER['REMOTE_ADDR']);
+	$values['user_level'] = 1;
 	
 	$database->insert($table, $values);
 	$page->html = $alert->displaySuccess("Account Created!");

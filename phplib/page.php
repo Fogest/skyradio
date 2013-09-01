@@ -70,6 +70,7 @@
 					<link href="'. CSS_PATH .'bootstrap'. CSS_EXTENSION .'" rel="stylesheet">
 					<link href="'.CSS_PATH.'bootstrap-responsive'.CSS_EXTENSION.'" rel="stylesheet">
 					<link href="'. CSS_PATH .'main.css" rel="stylesheet">
+					<link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet">
 				</head>
 				<body>
 				<div id="site">
@@ -88,7 +89,10 @@
 			          echo '
 					  <div class="nav-collapse collapse">
 			            <ul class="nav">';
-			              echo ($this->page_title == "Home") ? '<li class="active"><a href="'.SITE_URL.'index.php">Home</a></li>' : '<li><a href="'.SITE_URL.'index.php">Home</a></li>';
+			              echo ($this->page_title == "Script List") ? '<li class="active"><a href="'.SITE_URL.'index.php">Script List</a></li>' : '<li><a href="'.SITE_URL.'index.php">Script List</a></li>';
+						  if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) {
+							echo ($this->page_title == "Add Script") ? '<li class="active"><a href="'.HTML_PATH.'script/add_script.php">Add Script</a></li>' : '<li><a href="'.HTML_PATH.'script/add_script.php">Add Script</a></li>';
+						}
 			              echo ($this->page_title == "About") ? '<li class="active"><a href="'.HTML_PATH.'footer/about.php">About</a></li>' : '<li><a href="'.HTML_PATH.'footer/about.php">About</a></li>';
 			              echo ($this->page_title == "Contact") ? '<li class="active"><a href="'.HTML_PATH.'footer/contact.php">Contact</a></li>' : '<li><a href="'.HTML_PATH.'footer/contact.php">Contact</a></li>';
 			            echo '</ul>';
@@ -116,14 +120,13 @@
 					  </ul>
 					</div>';
 			} else {
-				echo '<a href="#login" class="btn" role="button" data-toggle="modal"><i class="icon-globe"></i> Sign in</a>
-					  <a href="#register" class="btn" role="button" data-toggle="modal"><i class="icon-pencil"></i> Register</a>';
+				echo '<a href="#login" class="btn" role="button" data-toggle="modal"><i class="icon-globe"></i> Sign in</a>';
 			}
 			
 			
 		}
 		
-			private function displayBody() {
+		private function displayBody() {
 			if($this->privilege == 0) {
 				$this->displayContent();
 			}
@@ -140,7 +143,7 @@
 		
 		private function displayContent() {
 			echo '<div id="mainContent" class="container">';
-			echo '<h1>' . $this->page_title . '</h1><hr/>';
+			echo '<h1 id="pgTitle">' . $this->page_title . '</h1><hr/>';
 			echo $this->html;
 			echo '</div>';
 		}
@@ -177,11 +180,11 @@
 		  </div>
 		  <div class="modal-body">
 		    <form name="login" action="'.SITE_URL.'index.php" method="post">
-				<label>Username/Email</label>';
+				<label>Username</label>';
 		if(isset($_POST['username']))
-			echo '<input type="text" placeholder="Username/Email" value="'.$_POST['username'].'" name="username_register">';
+			echo '<input type="text" placeholder="Username" value="'.$_POST['username'].'" name="username_register">';
 		else
-			echo '<input type="text" placeholder="Username/Email" name="username_register">';
+			echo '<input type="text" placeholder="Username" name="username_register">';
 		echo '			<label>Password</label>
 				<input type="password" placeholder="Password" name="password_register">
 				<label>Confirm Password</label>
@@ -209,9 +212,10 @@
 						</div>
 						<div id="footer-text" class="span12 text-center">
 							<a href="'.SITE_URL.'index.php">Home</a> | <a href="'.HTML_PATH.'footer/about.php">About</a> | <a href="'.HTML_PATH.'footer/contact.php">Contact</a><br/>
-							Copyright '. date("Y") .' Fog Productions (Justin)
+							Copyright '. date("Y") .' Fog Productions (Justin Visser)
+							</br>'.VERSION.'	
 						</div>
-							
+						
 					</div>
 				</div>
 			</div>
@@ -223,6 +227,22 @@
 								  $(\'input, textarea\').requiredStar();
 								});
 		  		</script>
+				<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+				<script src="'. JAVASCRIPT_PATH .'tinymce.min.js"></script>
+				<script>
+					$(function(){
+						$("#scriptDateField").datepicker({ dateFormat: "yy-mm-dd" });
+						tinymce.init({
+						selector: "textarea",
+						 plugins: [
+							"image charmap print preview anchor",
+							"searchreplace visualblocks code fullscreen",
+							"insertdatetime media table contextmenu paste"
+						],
+						toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+						});
+					});
+				</script>
 				</div>
 				</body>	
 				</html>';
