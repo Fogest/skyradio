@@ -74,3 +74,10 @@ input[type=text].valid, input[type=password].valid, textarea.valid {
 	background-color: white;
 	color: black;
 }
+
+a, a:visited {
+	color:rgb(79, 223, 59);
+}
+a:hover {
+	color:#77D2FF;
+}
