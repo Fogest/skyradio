@@ -38,7 +38,7 @@
 						<label>Date</label>
 						<input type="text" class="input-xlarge required" id="scriptDateField" name="date" maxlength="230">
 						<label>Script Contents</label>
-						<textarea rows="20" class="span9 input-xlarge required" id="scriptContent" name="scriptContent"></textarea><br/>
+						<textarea rows="20" class="ckeditor span9 input-xlarge required" id="scriptContent" name="scriptContent"></textarea><br/>
 						<input type="submit" name="submit" class="btn btn-primary">
 					</form>';
 					
