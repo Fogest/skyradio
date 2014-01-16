@@ -60,6 +60,9 @@
 		private function displayHeader() {
 			echo '<!DOCTYPE html>
 				<html lang="en">
+				<link rel="icon" 
+				  type="image/png" 
+				  href="'.IMAGE_PATH.'favicon.png">
 				<head>
 					<meta charset="utf-8">
 					<title>' . $this->page_title . ' | '.DEFAULT_SITE_NAME.'</title>
